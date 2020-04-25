@@ -7,6 +7,7 @@ import com.atguigu.eduservice.entity.vo.TeacherQuery;
 import com.atguigu.eduservice.mapper.EduTeacherMapper;
 import com.atguigu.eduservice.service.EduTeacherService;
 
+import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -156,6 +157,11 @@ public class EduTeacherController {
     public R getTeacher(
             @ApiParam(name = "id", value = "讲师ID", required = true)
             @PathVariable String id){
+        try {
+            int a = 10/0;
+        }catch(Exception e) {
+            throw new GuliException(20001,"出现guli-异常");
+        }
         EduTeacher eduTeacher = teacherService.getById(id);
         return R.ok().data("teacher",eduTeacher);
     }
