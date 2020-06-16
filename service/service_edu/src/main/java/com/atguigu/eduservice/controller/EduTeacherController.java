@@ -10,9 +10,7 @@ import com.atguigu.eduservice.service.EduTeacherService;
 import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +29,7 @@ import java.util.Map;
  */
 @Api(description="讲师管理")
 @RestController
+@CrossOrigin
 @RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
 
@@ -103,9 +102,9 @@ public class EduTeacherController {
     @PostMapping("pageTeacherCondition/{current}/{limit}")
     public R pageListTeacherCondition(
             @ApiParam(name = "current", value = "当前页码", required = true)
-            @PathVariable long current,
+            @PathVariable Long current,
             @ApiParam(name = "limit", value = "每页记录数", required = true)
-            @PathVariable long limit,
+            @PathVariable Long limit,
             @RequestBody(required = false) TeacherQuery teacherQuery){
         //创建page对象
         Page<EduTeacher> pageParam = new Page<>(current,limit);
