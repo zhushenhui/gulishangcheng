@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -50,7 +48,7 @@ public class EduTeacherController {
 
     // 按照id删除讲师数据
     @ApiOperation(value = "根据id逻辑删除讲师")
-    @DeleteMapping("deleteTeacher/{id}")
+    @DeleteMapping("/deleteTeacher/{id}")
     public R removeById(
             @ApiParam(name = "id", value = "讲师ID", required = true)
             @PathVariable String id){
@@ -74,11 +72,13 @@ public class EduTeacherController {
 //        return R.ok().data("items",teacher);
 //    }
 
-    //3 分页查询讲师的方法
-    //current 当前页
-    //limit 每页记录数
+    /**
+     * 分页查询讲师的方法
+     *  current 当前页
+     *  limit 每页记录数
+     */
     @ApiOperation(value = "分页讲师列表")
-    @GetMapping("pageTeacher/{current}/{limit}")
+    @GetMapping("/pageTeacher/{current}/{limit}")
     public R pageListTeacher(
             @ApiParam(name = "current", value = "当前页码", required = true)
             @PathVariable long current,
@@ -91,17 +91,14 @@ public class EduTeacherController {
         teacherService.page(pageTeacher,null);
         long total = pageTeacher.getTotal(); // 总记录数
         List<EduTeacher> records = pageTeacher.getRecords(); // 数据list集合
-//        Map map = new HashMap<>();
-//        map.put("total",total);
-//        map.put("rows",records);
         return R.ok().data("total",total).data("rows",records);
     }
 
     //4 条件查询带分页方法
     @ApiOperation(value = "条件查询分页讲师列表")
-    @PostMapping("pageTeacherCondition/{current}/{limit}")
+    @PostMapping("/pageTeacherCondition/{current}/{limit}")
     public R pageListTeacherCondition(
-            @ApiParam(name = "current", value = "当前页码", required = true)
+              @ApiParam(name = "current", value = "当前页码", required = true)
             @PathVariable Long current,
             @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable Long limit,
@@ -129,6 +126,8 @@ public class EduTeacherController {
         if (!StringUtils.isEmpty(end)) {
             wrapper.le("gmt_create", end);
         }
+        // 排序
+        wrapper.orderByDesc("gmt_modified","gmt_create");
         //调用方法实现条件查询分页
         teacherService.page(pageParam,wrapper);
         long total = pageParam.getTotal(); // 总记录数
@@ -138,7 +137,7 @@ public class EduTeacherController {
 
     //添加讲师接口
     @ApiOperation(value = "新增讲师")
-    @PostMapping("addTeacher")
+    @PostMapping("/addTeacher")
     public R addTeacher(
             @ApiParam(name = "teacher", value = "讲师对象", required = true)
             @RequestBody EduTeacher teacher){
@@ -152,22 +151,17 @@ public class EduTeacherController {
 
     // 根据id查找讲师接口
     @ApiOperation(value = "根据id查询讲师")
-    @GetMapping("getTeacher/{id}")
+    @GetMapping("/getTeacher/{id}")
     public R getTeacher(
             @ApiParam(name = "id", value = "讲师ID", required = true)
             @PathVariable String id){
-        try {
-            int a = 10/0;
-        }catch(Exception e) {
-            throw new GuliException(20001,"出现guli-异常");
-        }
         EduTeacher eduTeacher = teacherService.getById(id);
         return R.ok().data("teacher",eduTeacher);
     }
 
     //修改讲师接口
     @ApiOperation(value = "根据id修改讲师")
-    @PostMapping("updateTeacher")
+    @PostMapping("/updateTeacher")
     public R updateTeacher(
             @ApiParam(name = "teacher", value = "讲师对象", required = true)
             @RequestBody EduTeacher teacher){
