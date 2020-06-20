@@ -17,7 +17,6 @@ public class EduLoginController {
      */
     @PostMapping("/login")
     public R login() {
-
         return R.ok().data("token","admin");
     }
 
