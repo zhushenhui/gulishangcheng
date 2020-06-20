@@ -31,7 +31,7 @@ public class OssController {
      * @return
      */
     @ApiOperation(value = "文件上传")
-    @PostMapping("upload")
+    @PostMapping("/upload")
     public R uploadOssFile(
             @ApiParam(name = "file", value = "文件", required = true)
             @RequestParam("file") MultipartFile file) {

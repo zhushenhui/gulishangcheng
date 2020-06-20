@@ -45,7 +45,7 @@ public class OssServiceImpl implements OssService {
 
         // 在文件名中添加唯一随机值
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        fileName = uuid + fileName;
+        fileName = uuid + "_" + fileName;
 
         // 获取当前日期：2020/06/20
         String datePath = new DateTime().toString("yyyy/MM/dd");
