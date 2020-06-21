@@ -48,7 +48,7 @@ public class CodeGenerator {
         // 4、包配置
         PackageConfig pc = new PackageConfig();
         // 包 edu.atguigu.eduservice
-        pc.setParent("com.atguigu.demo");
+        pc.setParent("com.atguigu");
         // 模块名
         pc.setModuleName("eduservice");
         // 包 edu.atguigu.eduservice.contronller
@@ -61,7 +61,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         // 对应的数据库中的表，可以有多个
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_subject");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
