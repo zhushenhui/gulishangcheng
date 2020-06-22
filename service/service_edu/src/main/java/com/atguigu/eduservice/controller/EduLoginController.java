@@ -1,11 +1,13 @@
 package com.atguigu.eduservice.controller;
 
 import com.atguigu.commonutils.R;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zsh
  */
+@Api(description="登录功能")
 @CrossOrigin
 @RestController
 @RequestMapping("/eduservice/user")
