@@ -59,8 +59,6 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
         // 封装一级分类
         for (EduSubject eduSubject:oneSubjectList) {
             OneSubject oneSubject = new OneSubject();
-//            oneSubject.setId(eduSubject.getId());
-//            oneSubject.setTitle(eduSubject.getTitle());
             // 下面这行代码等于上面两行代码
             BeanUtils.copyProperties(eduSubject, oneSubject);
             finalSubjectList.add(oneSubject);
