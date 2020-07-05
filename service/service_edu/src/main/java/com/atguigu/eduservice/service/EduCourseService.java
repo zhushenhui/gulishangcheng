@@ -15,4 +15,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface EduCourseService extends IService<EduCourse> {
 
     String saveCourseInfo(CourseInfoVo courseInfoVo);
+
+    /**
+     * 根据课程id查询课程基本信息
+     */
+    CourseInfoVo getCourseInfo(String courseId);
+
+    /**
+     * 修改课程信息
+     * @param courseInfoVo
+     * @return
+     */
+    void updateCourseInfo(CourseInfoVo courseInfoVo);
 }

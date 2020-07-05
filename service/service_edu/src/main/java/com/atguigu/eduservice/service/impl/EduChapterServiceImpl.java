@@ -43,10 +43,12 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         // 1、根据课程id查询课程里的所有章节
         QueryWrapper<EduChapter> chapterQueryWrapper = new QueryWrapper<>();
         chapterQueryWrapper.eq("course_id", courseId);
+        chapterQueryWrapper.orderByAsc("cast(id AS SIGNED)");
         List<EduChapter> eduChapterList = baseMapper.selectList(chapterQueryWrapper);
         // 2、根据课程id查询课程里的所有小节
         QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
         videoQueryWrapper.eq("course_id", courseId);
+        videoQueryWrapper.orderByAsc("cast(id AS SIGNED)");
         List<EduVideo> eduVideoList = videoService.list(videoQueryWrapper);
         List<ChapterVo> finalList = new ArrayList<>();
         // 3、遍历查询章节list集合进行封装
