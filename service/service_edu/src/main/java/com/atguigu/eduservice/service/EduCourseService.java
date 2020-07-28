@@ -2,6 +2,7 @@ package com.atguigu.eduservice.service;
 
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
+import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -27,4 +28,11 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return
      */
     void updateCourseInfo(CourseInfoVo courseInfoVo);
+
+    /**
+     * 根据课程id查询课程确认信息
+     * @param id
+     * @return
+     */
+    CoursePublishVo publishCourseInfo(String id);
 }
