@@ -77,5 +77,11 @@ public class EduCourseController {
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(id);
         return R.ok().data("publishCourse", coursePublishVo);
     }
+
+    @PostMapping("publishCourse/{id}")
+    public R publishCourse(@PathVariable String id) {
+        
+        return R.ok();
+    }
 }
 
