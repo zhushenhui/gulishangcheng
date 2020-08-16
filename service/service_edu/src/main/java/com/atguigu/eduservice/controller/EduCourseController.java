@@ -2,6 +2,7 @@ package com.atguigu.eduservice.controller;
 
 
 import com.atguigu.commonutils.R;
+import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.service.EduCourseService;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -27,6 +30,14 @@ public class EduCourseController {
 
     @Autowired
     private EduCourseService courseService;
+
+    // 课程列表 基本实现
+    //TODO 完善条件查询带分页
+    @GetMapping()
+    public R getCourseList() {
+        List<EduCourse> list = courseService.list(null);
+        return R.ok().data("list",list);
+    }
 
     /**
      *  添加课程基本信息的方法
@@ -78,9 +89,19 @@ public class EduCourseController {
         return R.ok().data("publishCourse", coursePublishVo);
     }
 
+    /**
+     * 课程最终发布
+     * 修改课程状态
+     * @param id
+     * @return
+     */
     @PostMapping("publishCourse/{id}")
     public R publishCourse(@PathVariable String id) {
-        
+        EduCourse eduCourse = new EduCourse();
+        eduCourse.setId(id);
+        // 设置课程状态为已发布
+        eduCourse.setStatus("Normal");
+        courseService.updateById(eduCourse);
         return R.ok();
     }
 }
